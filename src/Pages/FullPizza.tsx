@@ -12,9 +12,7 @@ const FullPizza = () => {
   return (
     <div className="container">
       {isLoading ? (
-        <>
-          <Skeleton />
-        </>
+        <Skeleton />
       ) : error ? (
         'Error'
       ) : (
