@@ -1,4 +1,4 @@
-import { FC, Suspense } from 'react'
+import { FC } from 'react'
 import Categories from '../components/Categories'
 import Sort from '../components/Sort'
 import PizzaCard from '../components/PizzaBlock'
@@ -17,7 +17,6 @@ const Home: FC = () => {
             <Categories />
             <Sort />
           </div>
-          {/* <Skeleton /> */}
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
             {isLoading ? (

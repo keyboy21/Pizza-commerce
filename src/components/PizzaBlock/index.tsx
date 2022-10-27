@@ -1,4 +1,5 @@
 import { FC, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Pizza } from '../../Types/Pizza'
 
 type Props = {
@@ -20,7 +21,9 @@ const PizzaCard: FC<Props> = ({ pizza }) => {
   return (
     <div className="pizza-block">
       <h4 className="pizza-block__title">{pizza?.title}</h4>
-      <img className="pizza-block__image" src={pizza?.imageUrl} alt="Pizza" loading='lazy' />
+      <Link to={`/pizza/${pizza.id}`}>
+        <img className="pizza-block__image" src={pizza?.imageUrl} alt="Pizza" loading="lazy" />
+      </Link>
       <div className="pizza-block__selector">
         <ul>
           {pizza.types.map((typeId) => (
@@ -31,7 +34,9 @@ const PizzaCard: FC<Props> = ({ pizza }) => {
         </ul>
         <ul>
           {pizza.sizes.map((sizeId, index) => (
-            <li onClick={() => handleSize(index)} key={sizeId} className={sizeActive === index ? 'active' : ''}>{sizeId} см.</li>
+            <li onClick={() => handleSize(index)} key={sizeId} className={sizeActive === index ? 'active' : ''}>
+              {sizeId} см.
+            </li>
           ))}
         </ul>
       </div>
