@@ -7,7 +7,7 @@ import Skeleton from '../components/PizzaBlock/Skeleton'
 
 const FullPizza = () => {
   const { id } = useParams()
-  const { data, error, isLoading } = useQuery<Pizza>(['onePizza'], () => getOnePizza(id))
+  const { data, error, isLoading } = useQuery<Pizza>(['onePizza'], () => getOnePizza(id),{keepPreviousData: true})
 
   return (
     <div className="container">
