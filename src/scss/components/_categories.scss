@@ -1,8 +1,15 @@
 @import '../variables.scss';
-
+::-webkit-scrollbar {
+  width: 0px;
+}
 .categories {
+  overflow-x: scroll !important;
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
   ul {
     display: flex;
+    padding:10px 0;
 
     li {
       background-color: #f9f9f9;
@@ -29,3 +36,4 @@
     }
   }
 }
+

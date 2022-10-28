@@ -29,7 +29,7 @@ function App() {
           }
         />
         <Route
-          path="/*"
+          path="*"
           element={
             <Suspense fallback={<div>Идёт загрузка...</div>}>
               <NotFound />

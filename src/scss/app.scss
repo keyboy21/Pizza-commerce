@@ -6,6 +6,14 @@ body {
   background-color: $background;
 }
 
+@media (max-width:768px) {
+  .content__top{
+    display: block !important;
+    flex-direction:column-reverse;
+    align-items: flex-start;
+  }
+}
+
 .wrapper {
   width: calc(100vw - 100px);
   height: 100%;

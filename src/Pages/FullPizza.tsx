@@ -10,18 +10,18 @@ const FullPizza = () => {
   const { data, error, isLoading } = useQuery<Pizza>(['onePizza'], () => getOnePizza(id),{keepPreviousData: true})
 
   return (
-    <div className="container">
+    <div className="container" style={{textAlign:"center",paddingTop:"40px" }}>
       {isLoading ? (
         <Skeleton />
       ) : error ? (
         'Error'
       ) : (
         <>
-          <h2>{data?.title}</h2>
+          <h2 style={{marginBottom:"40px"}}>{data?.title}</h2>
           <img src={data?.imageUrl} />
           <h4>{data?.price} ₽</h4>
           <Link to="/">
-            <button className="button button--outline button--add">
+            <button className="button button--outline button--add" style={{marginBottom:"40px"}}>
               <span>Назад</span>
             </button>
           </Link>

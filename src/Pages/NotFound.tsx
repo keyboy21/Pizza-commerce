@@ -1,11 +1,7 @@
-import React from 'react'
+import Notfound from '../components/Notdound/Notfound'
 
 const NotFound = () => {
-  return (
-    <div>
-      <h1 style={{textAlign:"center"}}>Not found</h1>
-    </div>
-  )
+  return <Notfound />
 }
 
 export default NotFound

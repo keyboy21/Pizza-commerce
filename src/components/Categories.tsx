@@ -1,14 +1,14 @@
 import { FC, useState } from 'react'
+const categories = [
+  { id: 0, name: 'Все' },
+  { id: 1, name: 'Мясные' },
+  { id: 2, name: 'Вегетарианская' },
+  { id: 3, name: 'Гриль' },
+  { id: 4, name: 'Острые' },
+  { id: 5, name: 'Закрытые' },
+]
 
 const Categories: FC = () => {
-  const categories = [
-    { id: 0, name: 'Все' },
-    { id: 1, name: 'Мясные' },
-    { id: 2, name: 'Вегетарианская' },
-    { id: 3, name: 'Гриль' },
-    { id: 4, name: 'Острые' },
-    { id: 5, name: 'Закрытые' },
-  ]
   const [activeIndex, setActiveIndex] = useState(0)
 
   const ActiveHandler = (index: number): void => {
