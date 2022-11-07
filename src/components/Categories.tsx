@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useState, SetStateAction, Dispatch } from 'react'
 const categories = [
   { id: 0, name: 'Все' },
   { id: 1, name: 'Мясные' },
@@ -8,11 +8,16 @@ const categories = [
   { id: 5, name: 'Закрытые' },
 ]
 
-const Categories: FC = () => {
+type props = {
+  setCategory: Dispatch<SetStateAction<number>>
+}
+
+const Categories: FC<props> = ({ setCategory }) => {
   const [activeIndex, setActiveIndex] = useState(0)
 
   const ActiveHandler = (index: number): void => {
     setActiveIndex(index)
+    setCategory(index)
   }
 
   return (
