@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import './scss/pagi.css'
 import './scss/app.scss'
 import App from './App'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'

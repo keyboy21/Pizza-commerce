@@ -1,21 +1,26 @@
 import { FC, useState, useEffect } from 'react'
-import Categories from '../components/Categories'
-import Sort from '../components/Sort'
-import PizzaCard from '../components/PizzaBlock'
-import Skeleton from '../components/PizzaBlock/Skeleton'
 import { Pizza } from '../Types/Pizza'
 import { useQuery } from '@tanstack/react-query'
 import { getPizzas } from '../Api/GetPizza'
+import Skeleton from '../components/PizzaBlock/Skeleton'
+import Categories from '../components/Categories'
+import Sort from '../components/Sort'
+import PizzaCard from '../components/PizzaBlock'
+import Pagination from 'rc-pagination'
 
 const Home: FC = () => {
   const [page, setPage] = useState<number>(1)
   const [category, setCategory] = useState<number>(0)
 
+  const onChange = (pages: number) => {
+    setPage(pages)
+  }
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
-  const { data, error, isLoading, isPreviousData, isFetching } = useQuery<Pizza[]>(['pizza', page, category], () => getPizzas(page, category), { keepPreviousData: true })
+  const { data, error, isLoading, isFetching } = useQuery<Pizza[]>(['pizza', page, category], () => getPizzas(page, category), { keepPreviousData: true })
 
   return (
     <>
@@ -41,22 +46,10 @@ const Home: FC = () => {
             )}
           </div>
         </div>
+
+        {isFetching ? <span> Loading...</span> : null}
+        <Pagination onChange={onChange} current={page} total={45} />
       </div>
-      <span>Current Page: {page}</span>
-      <button onClick={() => setPage((old) => Math.max(old - 1, 0))} disabled={page === 1}>
-        Previous Page
-      </button>
-      <button
-        onClick={() => {
-          if (!isPreviousData && data?.length) {
-            setPage((old) => old + 1)
-          }
-        }}
-        disabled={isPreviousData || !data?.length}
-      >
-        Next Page
-      </button>
-      {isFetching ? <span> Loading...</span> : null}
     </>
   )
 }
