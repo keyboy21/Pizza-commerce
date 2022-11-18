@@ -1,15 +1,19 @@
-import { useState, FC, Dispatch, SetStateAction } from 'react'
-let list = [
-  { id: 0, name: 'популярности', sortProperty: 'rating' },
-  { id: 1, name: 'цене', sortProperty: 'price' },
-  { id: 2, name: 'алфавиту', sortProperty: 'title' },
+import { useState, FC, Dispatch, SetStateAction, memo } from 'react'
+import { sortType } from '../Types/Sort'
+let list: sortType[] = [
+  { id: 0, name: 'популярности(DESC)', sortProperty: 'rating', order: 'desc' },
+  { id: 1, name: 'популярности(ASC)', sortProperty: 'rating', order: 'asc' },
+  { id: 2, name: 'цене(DESC)', sortProperty: 'price', order: 'desc' },
+  { id: 3, name: 'цене(ASC)', sortProperty: 'price', order: 'asc' },
+  { id: 4, name: 'алфавиту(DESC)', sortProperty: 'title', order: 'desc' },
+  { id: 5, name: 'алфавиту(ASC)', sortProperty: 'title', order: 'asc' },
 ]
 
 type props = {
-  setSort: Dispatch<SetStateAction<string>>
+  setSort: Dispatch<SetStateAction<{ sortProperty: string; order: string }>>
 }
 
-const Sort: FC<props> = ({ setSort }) => {
+const Sort: FC<props> = memo(({ setSort }) => {
   const [visible, setVisible] = useState(false)
   const [selected, setSelected] = useState(0)
 
@@ -18,9 +22,9 @@ const Sort: FC<props> = ({ setSort }) => {
   const handleVisible = () => {
     setVisible(!visible)
   }
-  const handleClick = (id: number, sortProperty: string) => {
+  const handleClick = (id: number, sortProperty: string, order: string): void => {
     setSelected(id)
-    setSort(sortProperty)
+    setSort({ sortProperty, order })
     setVisible(false)
   }
   return (
@@ -37,7 +41,7 @@ const Sort: FC<props> = ({ setSort }) => {
         <div className="sort__popup">
           <ul>
             {list.map((item) => (
-              <li key={item.id} className={item.id === selected ? 'active' : ''} onClick={() => handleClick(item.id, item.sortProperty)}>
+              <li key={item.id} className={item.id === selected ? 'active' : ''} onClick={() => handleClick(item.id, item.sortProperty, item.order)}>
                 {item.name}
               </li>
             ))}
@@ -46,6 +50,6 @@ const Sort: FC<props> = ({ setSort }) => {
       )}
     </div>
   )
-}
+})
 
 export default Sort

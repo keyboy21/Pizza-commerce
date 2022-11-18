@@ -11,7 +11,7 @@ import PizzaCard from '../components/PizzaBlock'
 const Home: FC = () => {
   const [page, setPage] = useState<number>(1)
   const [category, setCategory] = useState<number>(0)
-  const [sort, setSort] = useState<string>('rating')
+  const [sort, setSort] = useState<{ sortProperty: string; order: string }>({ sortProperty: 'rating', order: 'desc' })
 
   const onChange = (pages: number) => {
     setPage(pages)
