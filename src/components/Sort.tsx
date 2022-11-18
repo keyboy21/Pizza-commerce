@@ -1,12 +1,12 @@
 import { useState, FC, Dispatch, SetStateAction, memo } from 'react'
 import { sortType } from '../Types/Sort'
 let list: sortType[] = [
-  { id: 0, name: 'популярности(DESC)', sortProperty: 'rating', order: 'desc' },
-  { id: 1, name: 'популярности(ASC)', sortProperty: 'rating', order: 'asc' },
-  { id: 2, name: 'цене(DESC)', sortProperty: 'price', order: 'desc' },
-  { id: 3, name: 'цене(ASC)', sortProperty: 'price', order: 'asc' },
-  { id: 4, name: 'алфавиту(DESC)', sortProperty: 'title', order: 'desc' },
-  { id: 5, name: 'алфавиту(ASC)', sortProperty: 'title', order: 'asc' },
+  { id: 0, name: 'популярности (High);', sortProperty: 'rating', order: 'desc' },
+  { id: 1, name: 'популярности (Low)', sortProperty: 'rating', order: 'asc' },
+  { id: 2, name: 'цене (High)', sortProperty: 'price', order: 'desc' },
+  { id: 3, name: 'цене (Low)', sortProperty: 'price', order: 'asc' },
+  { id: 4, name: 'алфавиту (High)', sortProperty: 'title', order: 'desc' },
+  { id: 5, name: 'алфавиту (Low)', sortProperty: 'title', order: 'asc' },
 ]
 
 type props = {
