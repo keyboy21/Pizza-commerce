@@ -1,16 +1,17 @@
 import { FC, useState, useEffect } from 'react'
-import { Pizza } from '../Types/Pizza'
 import { useQuery } from '@tanstack/react-query'
+import Pagination from 'rc-pagination'
+import { Pizza } from '../Types/Pizza'
 import { getPizzas } from '../Api/GetPizza'
 import Skeleton from '../components/PizzaBlock/Skeleton'
 import Categories from '../components/Categories'
 import Sort from '../components/Sort'
 import PizzaCard from '../components/PizzaBlock'
-import Pagination from 'rc-pagination'
 
 const Home: FC = () => {
   const [page, setPage] = useState<number>(1)
   const [category, setCategory] = useState<number>(0)
+  const [sort, setSort] = useState<string>('rating')
 
   const onChange = (pages: number) => {
     setPage(pages)
@@ -20,7 +21,7 @@ const Home: FC = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  const { data, error, isLoading, isFetching } = useQuery<Pizza[]>(['pizza', page, category], () => getPizzas(page, category), { keepPreviousData: true })
+  const { data, error, isLoading, isFetching } = useQuery<Pizza[]>(['pizza', page, category, sort], () => getPizzas(page, category, sort), { keepPreviousData: true })
 
   return (
     <>
@@ -28,7 +29,7 @@ const Home: FC = () => {
         <div className="container">
           <div className="content__top">
             <Categories setCategory={setCategory} />
-            <Sort />
+            <Sort setSort={setSort} />
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">

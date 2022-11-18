@@ -1,10 +1,15 @@
-import { useState } from 'react'
+import { useState, FC, Dispatch, SetStateAction } from 'react'
 let list = [
-  { id: 0, name: 'популярности' },
-  { id: 1, name: 'цене' },
-  { id: 2, name: 'алфавиту' },
+  { id: 0, name: 'популярности', sortProperty: 'rating' },
+  { id: 1, name: 'цене', sortProperty: 'price' },
+  { id: 2, name: 'алфавиту', sortProperty: 'title' },
 ]
-const Sort = () => {
+
+type props = {
+  setSort: Dispatch<SetStateAction<string>>
+}
+
+const Sort: FC<props> = ({ setSort }) => {
   const [visible, setVisible] = useState(false)
   const [selected, setSelected] = useState(0)
 
@@ -13,8 +18,9 @@ const Sort = () => {
   const handleVisible = () => {
     setVisible(!visible)
   }
-  const handleClick = (id: number) => {
+  const handleClick = (id: number, sortProperty: string) => {
     setSelected(id)
+    setSort(sortProperty)
     setVisible(false)
   }
   return (
@@ -31,7 +37,7 @@ const Sort = () => {
         <div className="sort__popup">
           <ul>
             {list.map((item) => (
-              <li key={item.id} className={item.id === selected ? 'active' : ''} onClick={() => handleClick(item.id)}>
+              <li key={item.id} className={item.id === selected ? 'active' : ''} onClick={() => handleClick(item.id, item.sortProperty)}>
                 {item.name}
               </li>
             ))}
