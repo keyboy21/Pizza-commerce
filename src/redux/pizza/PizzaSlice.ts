@@ -30,17 +30,15 @@ export const BasketSlice = createSlice({
   initialState,
   reducers: {
     addToBasket: (state, action: PayloadAction<IPizzaState>) => {
-
-      // const findItem = state.Basket.find((obj) => obj.globalId === action.payload.globalId);
-      const findItemId = state.Basket.find((obj) => obj.id === action.payload.id);
+      const findPizza = state.Basket.find((obj) => obj.id === action.payload.id);
       const findSize = state.Basket.find((obj) => obj.size === action.payload.size);
       const findType = state.Basket.find((obj) => obj.type === action.payload.type);
 
-      if (findItemId && findSize && findType) {
-        findItemId.count++;
-        findItemId.pizzaPrice += findItemId.price
+      if (findPizza && findSize && findType) {
+        findPizza.count++;
+        findPizza.pizzaPrice += findPizza.price
         state.TotalPizza++
-        state.TotalSum += findItemId.price
+        state.TotalSum += findPizza.price
       }
       else {
         state.Basket.push(action.payload)
@@ -53,20 +51,36 @@ export const BasketSlice = createSlice({
         state.TotalSum = 0,
         state.Basket = []
     },
-
     removePizza: (state, action: PayloadAction<{ globalId: string, size: number, type: number }>) => {
       const findItem = state.Basket.find((obj) => obj.globalId === action.payload.globalId);
-
       if (findItem) {
         state.Basket = state.Basket.filter((item) => item.globalId !== findItem.globalId)
         state.TotalSum -= findItem.pizzaPrice
         state.TotalPizza -= findItem.count
 
       }
+    },
+    incrementPizza: (state, action: PayloadAction<{ globalId: string }>) => {
+      const findPizza = state.Basket.find((obj) => obj.globalId === action.payload.globalId)
+      if (findPizza) {
+        findPizza.count++;
+        state.TotalPizza++
+        findPizza.pizzaPrice += findPizza.price
+        state.TotalSum += findPizza.price
+      }
+    },
+    decrementPizzaByOne: (state, action: PayloadAction<{ globalId: string }>) => {
+      const findPizza = state.Basket.find((obj) => obj.globalId === action.payload.globalId)
+      if (findPizza && findPizza.count > 1) {
+        findPizza.count--;
+        state.TotalPizza--
+        findPizza.pizzaPrice -= findPizza.price
+        state.TotalSum -= findPizza.price
+      }
     }
   }
 })
 
 
-export const { addToBasket, clearBasket, removePizza } = BasketSlice.actions
+export const { addToBasket, clearBasket, removePizza, incrementPizza, decrementPizzaByOne } = BasketSlice.actions
 export default BasketSlice.reducer
