@@ -17,11 +17,11 @@ const HaveCart = () => {
   }
 
   const Increment = (id: string): void => {
-    dispatch(incrementPizza({ globalId: id }))
+    dispatch(incrementPizza(id))
   }
 
   const decrementPizza = (id: string): void => {
-    dispatch(decrementPizzaByOne({ globalId: id }))
+    dispatch(decrementPizzaByOne(id))
   }
   return (
     <div className="cart">

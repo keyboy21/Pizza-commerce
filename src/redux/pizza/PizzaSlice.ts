@@ -1,23 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface IPizzaState {
-  globalId: string;
-  id: string;
-  imageUrl: string | null;
-  title: string;
-  type: number;
-  size: number;
-  price: number;
-  category: number;
-  count: number;
-  pizzaPrice: number;
-}
-
-interface IBasket {
-  Basket: IPizzaState[]
-  TotalSum: number
-  TotalPizza: number
-}
+import { IBasket, IPizzaState } from '../../Types/Basket'
 
 const initialState: IBasket = {
   Basket: [],
@@ -60,8 +42,8 @@ export const BasketSlice = createSlice({
 
       }
     },
-    incrementPizza: (state, action: PayloadAction<{ globalId: string }>) => {
-      const findPizza = state.Basket.find((obj) => obj.globalId === action.payload.globalId)
+    incrementPizza: (state, action: PayloadAction<string>) => {
+      const findPizza = state.Basket.find((obj) => obj.globalId === action.payload)
       if (findPizza) {
         findPizza.count++;
         state.TotalPizza++
@@ -69,8 +51,8 @@ export const BasketSlice = createSlice({
         state.TotalSum += findPizza.price
       }
     },
-    decrementPizzaByOne: (state, action: PayloadAction<{ globalId: string }>) => {
-      const findPizza = state.Basket.find((obj) => obj.globalId === action.payload.globalId)
+    decrementPizzaByOne: (state, action: PayloadAction<string>) => {
+      const findPizza = state.Basket.find((obj) => obj.globalId === action.payload)
       if (findPizza && findPizza.count > 1) {
         findPizza.count--;
         state.TotalPizza--
