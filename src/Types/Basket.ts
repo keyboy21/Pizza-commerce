@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const PizzaState = {
+const PizzaState = z.object({
   globalId: z.string(),
   id: z.string(),
   imageUrl: z.string().url({ message: "Invalid url" }),
@@ -12,12 +12,13 @@ const PizzaState = {
   rating: z.number(),
   pizzaPrice: z.number(),
   count: z.number(),
-}
+})
 
 const Basket = z.object({
-  Basket: z.array(z.object(PizzaState)),
+  Basket: z.array(PizzaState),
   TotalSum: z.number(),
   TotalPizza: z.number(),
 })
 
 export type IBasket = z.infer<typeof Basket>
+export type IPizzaState = z.infer<typeof PizzaState>
