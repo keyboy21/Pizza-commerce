@@ -1,18 +1,23 @@
-export interface IBasket {
-  Basket: IPizzaState[]
-  TotalSum: number
-  TotalPizza: number
+import { z } from "zod";
+
+const PizzaState = {
+  globalId: z.string(),
+  id: z.string(),
+  imageUrl: z.string().url({ message: "Invalid url" }),
+  title: z.string(),
+  type: z.number(),
+  size: z.number(),
+  price: z.number(),
+  category: z.number(),
+  rating: z.number(),
+  pizzaPrice: z.number(),
+  count: z.number(),
 }
 
-export interface IPizzaState {
-  globalId: string;
-  id: string;
-  imageUrl: string | null;
-  title: string;
-  type: number;
-  size: number;
-  price: number;
-  category: number;
-  count: number;
-  pizzaPrice: number;
-}
+const Basket = z.object({
+  Basket: z.array(z.object(PizzaState)),
+  TotalSum: z.number(),
+  TotalPizza: z.number(),
+})
+
+export type IBasket = z.infer<typeof Basket>
