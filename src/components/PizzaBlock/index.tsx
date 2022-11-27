@@ -36,6 +36,7 @@ const PizzaCard: FC<Props> = ({ pizza }) => {
         type: activeType,
         size: pizza.sizes[sizeActive],
         pizzaPrice: pizza.price,
+        rating: pizza.rating
       })
     )
   }
