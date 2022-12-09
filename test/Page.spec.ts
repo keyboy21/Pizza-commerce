@@ -7,7 +7,7 @@ test('homepage test', async ({ page }) => {
 
   // Categories test
   const categories = page.locator('.categories');
-  await expect(categories.locator('ul > li')).toContainText(['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']);
+  await expect(categories.locator('ul > li')).toContainText(['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'])
   await expect(categories.getByText("Все")).toHaveClass("active")
 
   const activated = page.locator('.categories');
